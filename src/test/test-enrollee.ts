@@ -1,8 +1,8 @@
 import { Enrollee } from 'src/app/shared/models/enrollee';
 
-export const TEST_GOOD_ENROLLEE: Enrollee = {
+export const TEST_GOOD_ENROLLEE_ACTIVE: Enrollee = {
   active: true,
-  dateOfBirth: '1962-11-3',
-  id: '36653835-fbe0-4c42-a93c-3e561823934f',
-  name: 'Kate Newell',
+  dateOfBirth: '2000-01-01',
+  id: 'test-very-long-id',
+  name: 'TestFirstName TestLastName',
 };
