@@ -8,6 +8,6 @@ import { ApiBaseService } from './api-base.service';
 })
 export class EnrolleeService extends ApiBaseService {
   public callEnrollees(): Observable<any> {
-    return this.callGet('ttt');
+    return this.callGet('enrollees');
   }
 }
