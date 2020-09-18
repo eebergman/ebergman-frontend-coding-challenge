@@ -15,10 +15,10 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
-    SharedModule,
     MaterialModule,
   ],
   providers: [EnrolleeService],
