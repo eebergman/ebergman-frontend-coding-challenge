@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EnrolleeService } from './core/services/enrollee.service';
 import { MaterialModule } from './modules/material/material.module';
+import { CoreModule } from './core/core/core.module';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +17,8 @@ import { MaterialModule } from './modules/material/material.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
     MaterialModule,
   ],
   providers: [EnrolleeService],
