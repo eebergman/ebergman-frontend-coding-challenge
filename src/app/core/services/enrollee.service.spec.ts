@@ -5,7 +5,7 @@ import {
 import { TestBed } from '@angular/core/testing';
 
 import { EnrolleeService } from './enrollee.service';
-import { TEST_GOOD_ENROLLEE_ACTIVE } from 'src/test/test-enrollee';
+import { TEST_GOOD_ENROLLEE_ACTIVE } from 'src/test/models/test-enrollee';
 
 describe('EnrolleeService', () => {
   let testEnrolleeService: EnrolleeService;
@@ -34,5 +34,7 @@ describe('EnrolleeService', () => {
     req.flush(TEST_GOOD_ENROLLEE_ACTIVE);
 
     expect(actual).toBe(expected);
+
+    httpMock.verify();
   });
 });
