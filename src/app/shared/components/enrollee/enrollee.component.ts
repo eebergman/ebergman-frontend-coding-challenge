@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -12,8 +11,7 @@ import { Enrollee } from '../../models/enrollee';
   templateUrl: './enrollee.component.html',
   styleUrls: ['./enrollee.component.scss'],
 })
-export class EnrolleeComponent implements OnInit, AfterViewInit {
-  public enrollees: Enrollee[] = [];
+export class EnrolleeComponent implements OnInit {
   public dataSource: MatTableDataSource<Enrollee>;
   public displayedColumns: string[] = [
     'active',
@@ -23,7 +21,6 @@ export class EnrolleeComponent implements OnInit, AfterViewInit {
   ];
   private _enrollees$: Observable<any>;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private _enrolleeService: EnrolleeService) {}
@@ -33,16 +30,16 @@ export class EnrolleeComponent implements OnInit, AfterViewInit {
     this.fetchInitialEnrolleeInformation();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  public applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   private fetchInitialEnrolleeInformation(): void {
     this._enrollees$ = this._enrolleeService.callEnrollees();
     this._enrollees$.subscribe((x) => {
       this.dataSource = new MatTableDataSource(x);
-      this.enrollees = x;
+      this.dataSource.sort = this.sort;
     });
   }
 }
