@@ -9,10 +9,10 @@ import { ApiBaseService } from './api-base.service';
 })
 export class EnrolleeService extends ApiBaseService {
   public fetchEnrollees(): Observable<Enrollee> {
-    return this.callGet('enrollees');
+    return this.callGetMany('enrollees');
   }
 
   public fetchEnrolleeById(enrolleeId: string): Observable<Enrollee> {
-    return this.callGet('enrollees', enrolleeId);
+    return this.callGetSingle('enrollees', enrolleeId);
   }
 }

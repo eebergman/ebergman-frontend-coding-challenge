@@ -11,14 +11,19 @@ export abstract class ApiBaseService {
 
   constructor(protected httpClient: HttpClient) {}
 
-  public callGet<T>(path: string, enrolleeId?: string): Observable<T> {
-    if (enrolleeId) {
-      return this.httpClient.get<T>(`${this.baseUrl}/${path}/${enrolleeId}`);
-    }
+  public callGetSingle<T>(path: string, userId: string): Observable<T> {
+    return this.httpClient.get<T>(`${this.baseUrl}/${path}/${userId}`);
+  }
+
+  public callGetMany<T>(path: string): Observable<T> {
     return this.httpClient.get<T>(`${this.baseUrl}/${path}`);
   }
 
-  public callPut(path, enrolleeId, requestBody): Observable<ArrayBuffer> {
+  public callPut(
+    path: string,
+    enrolleeId,
+    requestBody
+  ): Observable<ArrayBuffer> {
     return this.httpClient.put<any>(
       `${this.baseUrl}/${path}/${enrolleeId}`,
       requestBody
