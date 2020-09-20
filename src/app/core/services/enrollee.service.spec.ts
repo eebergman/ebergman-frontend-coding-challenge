@@ -27,7 +27,7 @@ describe('EnrolleeService', () => {
     let actual;
     const expected = TEST_GOOD_ENROLLEE_ACTIVE;
 
-    testEnrolleeService.callEnrollees().subscribe((data) => (actual = data));
+    testEnrolleeService.fetchEnrollees().subscribe((data) => (actual = data));
 
     const req = httpMock.expectOne((request) => request.method === 'GET');
 

@@ -7,7 +7,7 @@ import { TEST_GOOD_ENROLLEE_ACTIVE } from '../test-enrollee';
 
 @Injectable()
 export class MockEnrolleeService extends EnrolleeService {
-  callEnrollees(): Observable<Enrollee> {
+  fetchEnrollees(): Observable<Enrollee> {
     return of(TEST_GOOD_ENROLLEE_ACTIVE);
   }
 }

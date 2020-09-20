@@ -41,7 +41,7 @@ export class EnrolleeComponent implements OnInit {
   }
 
   private fetchInitialEnrolleeInformation(): void {
-    this._enrollees$ = this._enrolleeService.callEnrollees();
+    this._enrollees$ = this._enrolleeService.fetchEnrollees();
     this._enrollees$.subscribe((enrollee) => {
       this.dataSource = new MatTableDataSource(enrollee);
       this.dataSource.sort = this.sort;

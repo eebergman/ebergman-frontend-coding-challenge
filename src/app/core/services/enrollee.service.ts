@@ -8,7 +8,11 @@ import { ApiBaseService } from './api-base.service';
   providedIn: 'root',
 })
 export class EnrolleeService extends ApiBaseService {
-  public callEnrollees(): Observable<Enrollee> {
+  public fetchEnrollees(): Observable<Enrollee> {
     return this.callGet('enrollees');
+  }
+
+  public fetchEnrolleeById(enrolleeId: string): Observable<Enrollee> {
+    return this.callGet('enrollees', enrolleeId);
   }
 }
