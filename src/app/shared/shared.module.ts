@@ -7,6 +7,7 @@ import { EnrolleeComponent } from './components/enrollee/enrollee.component';
 import { NotFoundComponent } from './components/errors/not-found/not-found.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LayoutComponent } from './components/layout/layout/layout.component';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,11 @@ import { LayoutComponent } from './components/layout/layout/layout.component';
     EnrolleeComponent,
     LayoutComponent,
     HeaderComponent,
+    EditDialogComponent,
   ],
   imports: [CommonModule, RouterModule, MaterialModule],
-  exports: [LayoutComponent, EnrolleeComponent],
+  exports: [LayoutComponent, EnrolleeComponent, EditDialogComponent],
+  entryComponents: [EditDialogComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}
