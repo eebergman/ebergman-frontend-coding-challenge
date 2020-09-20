@@ -14,15 +14,16 @@ const routes: Routes = [
         path: '',
         component: EnrolleeComponent,
       },
+      {
+        path: '404',
+        component: NotFoundComponent,
+      },
     ],
   },
-  {
-    path: '404',
-    component: NotFoundComponent,
-  },
+
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: '404',
   },
 ];
 
