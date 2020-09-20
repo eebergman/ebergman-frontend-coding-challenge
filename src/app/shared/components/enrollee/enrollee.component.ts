@@ -13,15 +13,10 @@ import { Enrollee } from '../../models/enrollee';
 })
 export class EnrolleeComponent implements OnInit {
   public dataSource: MatTableDataSource<Enrollee>;
-  public displayedColumns: string[] = [
-    'active',
-    'dateOfBirth',
-    'enrolleeID',
-    'enrolleeName',
-  ];
+  public displayedColumns: string[] = ['name', 'dateOfBirth', 'id', 'active'];
   private _enrollees$: Observable<any>;
 
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private _enrolleeService: EnrolleeService) {}
 
@@ -37,8 +32,8 @@ export class EnrolleeComponent implements OnInit {
 
   private fetchInitialEnrolleeInformation(): void {
     this._enrollees$ = this._enrolleeService.callEnrollees();
-    this._enrollees$.subscribe((x) => {
-      this.dataSource = new MatTableDataSource(x);
+    this._enrollees$.subscribe((enrollee) => {
+      this.dataSource = new MatTableDataSource(enrollee);
       this.dataSource.sort = this.sort;
     });
   }
