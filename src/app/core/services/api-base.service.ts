@@ -6,26 +6,27 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export abstract class ApiBaseService {
+export abstract class ApiBaseService<T> {
   public baseUrl: URL | string;
+  public resourcePath: string;
 
-  constructor(protected httpClient: HttpClient) {}
-
-  public callGetSingle<T>(path: string, userId: string): Observable<T> {
-    return this.httpClient.get<T>(`${this.baseUrl}/${path}/${userId}`);
+  constructor(resourcePath: string, protected httpClient: HttpClient) {
+    this.resourcePath = resourcePath;
   }
 
-  public callGetMany<T>(path: string): Observable<T> {
-    return this.httpClient.get<T>(`${this.baseUrl}/${path}`);
+  protected callGetSingle(userId: string): Observable<T> {
+    return this.httpClient.get<T>(
+      `${this.baseUrl}/${this.resourcePath}/${userId}`
+    );
   }
 
-  public callPut(
-    path: string,
-    enrolleeId,
-    requestBody
-  ): Observable<ArrayBuffer> {
+  protected callGetMany(): Observable<[T]> {
+    return this.httpClient.get<[T]>(`${this.baseUrl}/${this.resourcePath}`);
+  }
+
+  protected callPut(enrolleeId, requestBody): Observable<ArrayBuffer> {
     return this.httpClient.put<any>(
-      `${this.baseUrl}/${path}/${enrolleeId}`,
+      `${this.baseUrl}/${this.resourcePath}/${enrolleeId}`,
       requestBody
     );
   }
