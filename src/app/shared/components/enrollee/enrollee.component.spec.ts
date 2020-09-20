@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { EnrolleeService } from 'src/app/core/services/enrollee.service';
 import { MaterialModule } from 'src/app/modules/material/material.module';
 import { MockEnrolleeService } from 'src/test/mocks/mockEnrolleeService';
-import { TEST_GOOD_ENROLLEE_ACTIVE } from 'src/test/test-enrollee';
+import { TEST_GOOD_ENROLLEE_ACTIVE } from 'src/test/models/test-enrollee';
 import { Enrollee } from '../../models/enrollee';
 import { EnrolleeComponent } from './enrollee.component';
 

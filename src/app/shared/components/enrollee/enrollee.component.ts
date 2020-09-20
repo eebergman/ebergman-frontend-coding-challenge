@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { EnrolleeService } from 'src/app/core/services/enrollee.service';
 import { Enrollee } from '../../models/enrollee';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'fcc-enrollee',
   templateUrl: './enrollee.component.html',
   styleUrls: ['./enrollee.component.scss'],
 })
-export class EnrolleeComponent implements OnInit {
+export class EnrolleeComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<Enrollee>;
   public displayedColumns: string[] = [
     'name',
@@ -21,14 +23,26 @@ export class EnrolleeComponent implements OnInit {
     'edit',
   ];
   private _enrollees$: Observable<any>;
+  private _subscriptions: Subscription[] = [];
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private _enrolleeService: EnrolleeService) {}
+  constructor(
+    public dialog: MatDialog,
+    private _enrolleeService: EnrolleeService
+  ) {}
 
   ngOnInit(): void {
     this._enrolleeService.configure('http://localhost:8080');
     this.fetchInitialEnrolleeInformation();
+  }
+
+  ngOnDestroy(): void {
+    if (this._subscriptions) {
+      this._subscriptions.forEach((subscription) => {
+        subscription.unsubscribe();
+      });
+    }
   }
 
   public applyFilter(event: Event): void {
@@ -38,13 +52,20 @@ export class EnrolleeComponent implements OnInit {
 
   public openEditEnrolleeDialog(enrolleeID: string): void {
     console.log(enrolleeID);
+    this.dialog.open(EditDialogComponent, {
+      data: {
+        enrollee: this._enrolleeService.fetchEnrolleeById(enrolleeID),
+      },
+    });
   }
 
   private fetchInitialEnrolleeInformation(): void {
     this._enrollees$ = this._enrolleeService.fetchEnrollees();
-    this._enrollees$.subscribe((enrollee) => {
-      this.dataSource = new MatTableDataSource(enrollee);
-      this.dataSource.sort = this.sort;
-    });
+    this._subscriptions.push(
+      this._enrollees$.subscribe((enrollee) => {
+        this.dataSource = new MatTableDataSource(enrollee);
+        this.dataSource.sort = this.sort;
+      })
+    );
   }
 }
