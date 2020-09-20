@@ -34,9 +34,8 @@ describe('EnrolleeComponent', () => {
   });
 
   it('should fetch the enrollees', () => {
-    let actual = JSON.parse(JSON.stringify(component.dataSource.filteredData));
-    actual = actual as Enrollee;
+    const actual = component.dataSource.filteredData;
 
-    expect(actual).toEqual(TEST_GOOD_ENROLLEE_ACTIVE);
+    expect(actual).toEqual([TEST_GOOD_ENROLLEE_ACTIVE]);
   });
 });

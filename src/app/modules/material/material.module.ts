@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 
 const components = [
   MatTableModule,
@@ -20,6 +21,7 @@ const components = [
   MatIconModule,
   MatButtonModule,
   MatDialogModule,
+  MatRadioModule,
 ];
 
 @NgModule({

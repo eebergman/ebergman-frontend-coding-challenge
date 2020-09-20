@@ -23,7 +23,7 @@ describe('EnrolleeService', () => {
     expect(testEnrolleeService).toBeTruthy();
   });
 
-  it('should call the callEnrollees endpoint', () => {
+  it('should call the fetchEnrollees endpoint', () => {
     let actual;
     const expected = TEST_GOOD_ENROLLEE_ACTIVE;
 

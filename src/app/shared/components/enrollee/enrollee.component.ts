@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -51,10 +51,19 @@ export class EnrolleeComponent implements OnInit, OnDestroy {
   }
 
   public openEditEnrolleeDialog(enrolleeID: string): void {
-    console.log(enrolleeID);
+    this._subscriptions.push(
+      this._enrolleeService
+        .fetchEnrolleeById(enrolleeID)
+        .subscribe((searchedForEnrollee) => {
+          this.openDialog(searchedForEnrollee);
+        })
+    );
+  }
+
+  private openDialog(enrolleeToEdit: Enrollee): void {
     this.dialog.open(EditDialogComponent, {
       data: {
-        enrollee: this._enrolleeService.fetchEnrolleeById(enrolleeID),
+        enrollee: enrolleeToEdit,
       },
     });
   }

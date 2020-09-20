@@ -1,1 +1,52 @@
-<p>{{ data.name }}</p>
+<h1 mat-dialog-title>Enrollee Edit</h1>
+<div mat-dialog-content>
+  <form [formGroup]="enrolleeFormGroup">
+    <mat-form-field appearance="outline">
+      <mat-label>Enrollee Name</mat-label>
+      <input
+        matInput
+        [(value)]="enrolleeToEdit.name"
+        formControlName="enrolleeNameControl"
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="outline">
+      <mat-label>Enrollee Date of Birth</mat-label>
+      <input
+        matInput
+        [(value)]="enrolleeToEdit.dateOfBirth"
+        formControlName="dateOfBirthControl"
+      />
+    </mat-form-field>
+    <br />
+    <!-- Enrollee ID -->
+    <mat-form-field appearance="outline">
+      <mat-label>Enrollee ID</mat-label>
+      <input
+        matInput
+        [(value)]="enrolleeToEdit.id"
+        formControlName="enrolleeIdControl"
+      />
+    </mat-form-field>
+    <br />
+    <!-- Enrollee ID -->
+
+    <!-- Select Active Status -->
+    <mat-radio-group formControlName="activeControl">
+      <mat-radio-button value="true"> True </mat-radio-button>
+      <br />
+      <br />
+      <mat-radio-button value="false"> False </mat-radio-button>
+    </mat-radio-group>
+    <!-- Select Active Status -->
+
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Active</mat-label>
+      <input
+        matInput
+        [(value)]="enrolleeToEdit.active"
+        formControlName="activeControl"
+      />
+    </mat-form-field> -->
+  </form>
+</div>

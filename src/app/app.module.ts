@@ -9,12 +9,14 @@ import { CoreModule } from './core/core.module';
 import { EnrolleeService } from './core/services/enrollee.service';
 import { MaterialModule } from './modules/material/material.module';
 import { SharedModule } from './shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
