@@ -13,7 +13,13 @@ import { Enrollee } from '../../models/enrollee';
 })
 export class EnrolleeComponent implements OnInit {
   public dataSource: MatTableDataSource<Enrollee>;
-  public displayedColumns: string[] = ['name', 'dateOfBirth', 'id', 'active'];
+  public displayedColumns: string[] = [
+    'name',
+    'dateOfBirth',
+    'id',
+    'active',
+    'edit',
+  ];
   private _enrollees$: Observable<any>;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -28,6 +34,10 @@ export class EnrolleeComponent implements OnInit {
   public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  public openEditEnrolleeDialog(enrolleeID: string): void {
+    console.log(enrolleeID);
   }
 
   private fetchInitialEnrolleeInformation(): void {
