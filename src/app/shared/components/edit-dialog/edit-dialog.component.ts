@@ -1,11 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  RequiredValidator,
-  Validators,
-} from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Enrollee } from '../../models/enrollee';
 
@@ -20,6 +15,7 @@ export class EditDialogComponent implements OnInit {
   public enrolleeToEdit: Enrollee;
 
   constructor(
+    public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private _formBuilder: FormBuilder
   ) {}
@@ -29,12 +25,9 @@ export class EditDialogComponent implements OnInit {
     this.createEnrolleeFormGroup();
   }
 
-  //   onSubmit() {
-  //     this.submitted = true;
-  //     if (this.enrolleeFormGroup.invalid) {
-  //         return;
-  //     }
-  // }
+  public cancelCloseDialog(): void {
+    this.dialogRef.close();
+  }
 
   private createEnrolleeFormGroup(): void {
     this.enrolleeFormGroup = this._formBuilder.group({

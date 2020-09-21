@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -7,6 +7,8 @@ import { Observable, Subscription } from 'rxjs';
 import { EnrolleeService } from 'src/app/core/services/enrollee.service';
 import { Enrollee } from '../../models/enrollee';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { FormGroup } from '@angular/forms';
+import { UpdateEnrollee } from '../../models/update-enrollee';
 
 @Component({
   selector: 'fcc-enrollee',
@@ -61,11 +63,31 @@ export class EnrolleeComponent implements OnInit, OnDestroy {
   }
 
   private openDialog(enrolleeToEdit: Enrollee): void {
-    this.dialog.open(EditDialogComponent, {
+    let updateEnrollee: UpdateEnrollee;
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      minHeight: '430px',
       data: {
         enrollee: enrolleeToEdit,
       },
     });
+
+    this._subscriptions.push(
+      dialogRef.afterClosed().subscribe((editForm: FormGroup) => {
+        console.log(editForm);
+
+        updateEnrollee = {
+          active: editForm.controls.activeControl.value,
+          name: editForm.controls.enrolleeNameControl.value,
+        };
+
+        const upDateInformation = this._enrolleeService.updateSingleEnrollee(
+          enrolleeToEdit.id,
+          updateEnrollee
+        );
+        this._subscriptions.push(upDateInformation.subscribe((x) => {}));
+        this.fetchInitialEnrolleeInformation();
+      })
+    );
   }
 
   private fetchInitialEnrolleeInformation(): void {

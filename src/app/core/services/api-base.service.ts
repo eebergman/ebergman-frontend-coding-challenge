@@ -24,7 +24,11 @@ export abstract class ApiBaseService<T> {
     return this.httpClient.get<[T]>(`${this.baseUrl}/${this.resourcePath}`);
   }
 
-  protected callPut(enrolleeId, requestBody): Observable<ArrayBuffer> {
+  protected callPut(enrolleeId: string, requestBody): Observable<ArrayBuffer> {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+    console.log(`${this.baseUrl}/${this.resourcePath}/${enrolleeId}/`);
+    console.log(requestBody);
+
     return this.httpClient.put<any>(
       `${this.baseUrl}/${this.resourcePath}/${enrolleeId}`,
       requestBody
